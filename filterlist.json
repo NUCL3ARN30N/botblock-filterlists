@@ -1,0 +1,38 @@
+{
+  "botblockFilterList": true,
+  "name": "BotBlock Community Filter List",
+  "version": 1,
+  "updatedAt": "2026-08-05T00:00:00Z",
+  "widgets": [
+    {
+      "key": "papercups",
+      "name": "Papercups",
+      "domains": ["papercups.io", "app.papercups.io"],
+      "tokens": ["papercups"]
+    },
+    {
+      "key": "livehelpnow",
+      "name": "LiveHelpNow",
+      "domains": ["livehelpnow.net"],
+      "tokens": ["livehelpnow", "lhnbutton"]
+    },
+    {
+      "key": "zohodesk",
+      "name": "Zoho Desk Widget",
+      "domains": ["desk.zoho.com"],
+      "tokens": ["zohodesk", "zd-widget"]
+    },
+    {
+      "key": "clickconnector",
+      "name": "ClickConnector",
+      "domains": ["clickconnector.app"],
+      "tokens": ["clickconnector"]
+    },
+    {
+      "key": "chatwith",
+      "name": "Chatwith",
+      "domains": ["chatwith.tools"],
+      "tokens": ["chatwith-widget", "chatwith-bubble"]
+    }
+  ]
+}
