@@ -1,5 +1,7 @@
 # BotBlock Filter Lists
 
+[![Validate filter lists](https://github.com/NUCL3ARN30N/botblock-filterlists/actions/workflows/validate.yml/badge.svg)](https://github.com/NUCL3ARN30N/botblock-filterlists/actions/workflows/validate.yml)
+
 Community-maintained filter lists of chat/AI widget rules for
 [BotBlock](https://github.com/NUCL3ARN30N/BotBlock) — subscribe to a list
 instead of adding every vendor to BotBlock's options page by hand.
@@ -58,9 +60,24 @@ Each entry in `widgets`:
 1. Fork this repo.
 2. Add an entry to the `widgets` array in `filterlist.json` — keep it alphabetically sorted by `key`.
 3. Bump `updatedAt` to the current UTC time (`version` only needs bumping on a breaking format change, not for adding widgets).
-4. Open a PR with a short description of the widget/vendor and, ideally, a public site where it's visible (helps reviewers verify the domain/token match without guessing).
+4. Run `node scripts/validate.js` locally and fix anything it flags.
+5. Open a PR with a short description of the widget/vendor and, ideally, a public site where it's visible (helps reviewers verify the domain/token match without guessing).
 
 Keep `tokens` specific enough to avoid false positives — a generic token like `"chat"` alone would match far more than the intended widget. Prefer vendor-specific substrings (e.g. `"acme-chat-widget"` over `"chat-widget"`).
+
+### Validation
+
+Every PR runs `scripts/validate.js` in CI (see the badge above) and must
+pass before merging. It's a dependency-free Node script, so `node
+scripts/validate.js` from the repo root reproduces the check exactly. It
+enforces:
+
+- Valid JSON, with `"botblockFilterList": true` and a `widgets` array.
+- Each widget has a `name` and at least one non-empty `tokens` entry.
+- `key`, if given, is a lowercase slug and unique within the file.
+- `domains`, if given, are bare hostnames — no `https://`, no path.
+- Tokens aren't a single overly generic word (`"chat"`, `"bot"`, `"widget"`, etc. alone) that would match far more than the intended vendor.
+- No more than 200 widgets per file (BotBlock's per-list cap — anything beyond that is silently dropped on fetch).
 
 ## License
 
